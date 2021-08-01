@@ -16,7 +16,8 @@ class Textbox(AppObject):
         super().__init__(position)
         self.size = size
         self.background_color = background_color
-        self.surface = surface.Surface(size).fill(background_color)
+        self.surface = surface.Surface(size)
+        self.surface.fill(self.background_color)
         self.outline = rect.Rect(position, size)
         self.outline_color = outline_color
         self.outline_width = outline_width

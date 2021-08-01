@@ -8,7 +8,7 @@ class AppObject:
         self.surface = None
         self.selected = False
 
-    def draw(self, screen: surface.Surface) -> None:
+    def render(self, screen: surface.Surface) -> None:
         screen.blit(self.surface, self.position)
 
     def move(self, new_position: Tuple[int, int]) -> None:
