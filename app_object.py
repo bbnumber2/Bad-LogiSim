@@ -6,6 +6,7 @@ class AppObject:
     def __init__(self, position: Tuple[int, int]) -> None:
         self.position = position
         self.surface = None
+        self.selected = False
 
     def draw(self, screen: surface.Surface) -> None:
         screen.blit(self.surface, self.position)

@@ -11,3 +11,8 @@ class Display(Enum):
     FOREGROUND_RADIUS = 5
     FONT_FILENAME = 'Resources/LiberationSans-Regular.ttf'
     FONT_SIZE = 16
+
+
+class Text(Enum):
+    BACKGROUND_COLOR = (40, 40, 40)
+    TEXT_COLOR = (204, 204, 204)
