@@ -1,10 +1,10 @@
 from typing import Tuple
-import pygame
+from pygame import pygame, font, display, event
 
 
 class Simulation:
     """
-    Creates the simulation window for the application.
+    Displays the application on the screen and creates all functionality
     """
     def __init__(self,
                  window_size: Tuple[int, int],
@@ -16,20 +16,26 @@ class Simulation:
         self.window_size = window_size
         self.background_color = background_color
         self.foreground_color = foreground_color
-        self.font = pygame.font.Font(font_filename, font_size)
+        self.font = font.Font(font_filename, font_size)
         self.screen = None
 
-    def create_window(self):
-        self.screen = pygame.display.set_mode(self.window_size)
+    def create_window(self) -> None:
+        self.screen = display.set_mode(self.window_size)
         self.screen.fill(self.background_color)
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-            pygame.display.flip()
+
+    def start(self) -> None:
+        quit = event.Event(pygame.QUIT)
+        while not event.get(pygame.QUIT):
+            for e in event.get():
+                if e.type == pygame.KEYDOWN:
+                    key = e.key
+                    if key == pygame.K_ESCAPE:
+                        pygame.event.post(quit)
+            # Should be replaced with display.update() at some point
+            display.flip()
 
 
 sim = Simulation((500, 500), (30, 30, 30), (0, 0, 0),
                  'Resources/LiberationSans-Regular.ttf', 16)
 sim.create_window()
+sim.start()
