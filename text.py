@@ -1,19 +1,23 @@
 from typing import Tuple
-from pygame import font
+from app_object import AppObject
+from pygame import font, surface
 
 
-class Textbox:
-    """Creates a textbox at the given x and y coordinates"""
-    def __init__(self, x: int, y: int, size: Tuple[int, int],
-                 cursor_color: Tuple[int, int, int],
+class Textbox(AppObject):
+    """Creates a textbox at the given position"""
+    def __init__(self, position: Tuple[int, int], size: Tuple[int, int],
+                 background_color: Tuple[int, int, int],
+                 text_color: Tuple[int, int, int],
                  font: font.Font) -> None:
-        self.x = x
-        self.y = y
+        super().__init__(position)
         self.size = size
-        self.cursor_color = cursor_color
+        self.background_color = background_color
+        self.surface = surface.Surface(size).fill(background_color)
+        self.text_color = text_color
+        self.text = ''
 
     def click(self) -> None:
-        pass
+        self.text = '|' + self.text[1:]
 
     def type(self, character: str) -> None:
         pass
