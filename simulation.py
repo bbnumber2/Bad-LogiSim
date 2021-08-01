@@ -38,13 +38,17 @@ class Simulation:
                   border_radius=self.foreground_radius)
 
     def start(self) -> None:
-        quit = event.Event(pygame.QUIT)
-        while not event.get(pygame.QUIT):
+        running = True
+        while running:
             for e in event.get():
+                if e.type == pygame.QUIT:
+                    running = False
+                    break
                 if e.type == pygame.KEYDOWN:
                     key = e.key
                     if key == pygame.K_ESCAPE:
-                        pygame.event.post(quit)
+                        running = False
+                        break
             # Should be replaced with display.update() at some point
             display.flip()
 
