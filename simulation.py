@@ -1,7 +1,7 @@
 import pygame
 from pygame import font, display, event, draw, Rect
 from constants import Display, Text
-from text import Textbox
+from textbox import Textbox
 
 
 class Simulation:
