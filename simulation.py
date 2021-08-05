@@ -42,6 +42,16 @@ class Simulation:
                     if key == pygame.K_ESCAPE:
                         running = False
                         break
+                    textbox.add_character(ord(key))
+                elif e.type == pygame.MOUSEBUTTONDOWN:
+                    button = e.button
+                    pos = e.pos
+                    if button == 1:
+                        for object in objects:
+                            if object.rect.collidepoint(pos):
+                                object.click()
+                                continue
+                            object.unclick()
             for object in objects:
                 object.update()
                 object.render(self.screen)

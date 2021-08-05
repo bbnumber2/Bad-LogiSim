@@ -13,12 +13,11 @@ class Textbox(AppObject):
                  font: font.Font,
                  text_color: Tuple[int, int, int],
                  text_position: Tuple[int, int]) -> None:
-        super().__init__(position)
-        self.size = size
+        super().__init__(position, size)
         self.background_color = background_color
-        self.surface = surface.Surface(size)
+        self.surface = surface.Surface(self.size)
         self.surface.fill(self.background_color)
-        self.outline = rect.Rect(position, size)
+        self.outline = rect.Rect(position, self.size)
         self.outline_color = outline_color
         self.outline_width = outline_width
         self.outline_radius = outline_radius
@@ -29,6 +28,9 @@ class Textbox(AppObject):
 
     def click(self) -> None:
         self.selected = True
+
+    def unclick(self) -> None:
+        self.selected = False
 
     def update(self) -> None:
         self.surface.fill(self.background_color)
