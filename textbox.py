@@ -7,6 +7,7 @@ class Textbox(AppObject):
     """Creates a textbox at the given position"""
     def __init__(self, position: Tuple[int, int], size: Tuple[int, int],
                  background_color: Tuple[int, int, int],
+                 outline_position: Tuple[int, int],
                  outline_color: Tuple[int, int, int],
                  outline_width: int,
                  outline_radius: int,
@@ -17,7 +18,7 @@ class Textbox(AppObject):
         self.background_color = background_color
         self.surface = surface.Surface(self.size)
         self.surface.fill(self.background_color)
-        self.outline = rect.Rect(position, self.size)
+        self.outline = rect.Rect(outline_position, self.size)
         self.outline_color = outline_color
         self.outline_width = outline_width
         self.outline_radius = outline_radius

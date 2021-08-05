@@ -26,6 +26,7 @@ class Simulation:
         textbox_font = font.Font(Text.FONT_FILENAME, Text.FONT_SIZE)
         textbox = Textbox(Text.TEXTBOX_POSITION, Text.TEXTBOX_SIZE,
                           Text.TEXTBOX_BACKGROUND_COLOR,
+                          Text.TEXTBOX_OUTLINE_POSITION,
                           Text.TEXTBOX_OUTLINE_COLOR,
                           Text.TEXTBOX_OUTLINE_WIDTH,
                           Text.TEXTBOX_OUTLINE_RADIUS, textbox_font,
@@ -37,7 +38,7 @@ class Simulation:
                 if e.type == pygame.QUIT:
                     running = False
                     break
-                if e.type == pygame.KEYDOWN:
+                elif e.type == pygame.KEYDOWN:
                     key = e.key
                     if key == pygame.K_ESCAPE:
                         running = False
