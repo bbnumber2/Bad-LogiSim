@@ -43,7 +43,12 @@ class Simulation:
                     if key == pygame.K_ESCAPE:
                         running = False
                         break
-                    textbox.add_character(ord(key))
+                    # Should be replaced with more versatile keyboard in future
+                    if textbox.selected:
+                        if key == pygame.K_BACKSPACE:
+                            textbox.remove_character()
+                        else:
+                            textbox.add_character(chr(key))
                 elif e.type == pygame.MOUSEBUTTONDOWN:
                     button = e.button
                     pos = e.pos
