@@ -1,5 +1,4 @@
 import pygame
-from pygame import font, display, event, draw, Rect
 from constants import Display, Text
 from textbox import Textbox
 
@@ -13,19 +12,20 @@ class Simulation:
         self.screen = None
 
     def create_window(self) -> None:
-        self.screen = display.set_mode(Display.WINDOW_SIZE)
+        self.screen = pygame.display.set_mode(Display.WINDOW_SIZE)
         self.screen.fill(Display.BACKGROUND_COLOR)
-        foreground_rect = Rect(Display.FOREGROUND_POSITION,
-                               Display.FOREGROUND_SIZE)
-        draw.rect(self.screen, Display.FOREGROUND_COLOR, foreground_rect,
-                  width=Display.FOREGROUND_WIDTH,
-                  border_radius=Display.FOREGROUND_RADIUS)
+        foreground_rect = pygame.Rect(Display.FOREGROUND_POSITION,
+                                      Display.FOREGROUND_SIZE)
+        pygame.draw.rect(self.screen, Display.FOREGROUND_COLOR,
+                         foreground_rect, width=Display.FOREGROUND_WIDTH,
+                         border_radius=Display.FOREGROUND_RADIUS)
 
     def start(self) -> None:
         objects = []
-        textbox_font = font.Font(Text.FONT_FILENAME, Text.FONT_SIZE)
+        textbox_font = pygame.font.Font(Text.FONT_FILENAME, Text.FONT_SIZE)
         textbox = Textbox(Text.TEXTBOX_POSITION, Text.TEXTBOX_SIZE,
                           Text.TEXTBOX_BACKGROUND_COLOR,
+                          Text.TEXTBOX_OUTLINE_POSITION,
                           Text.TEXTBOX_OUTLINE_COLOR,
                           Text.TEXTBOX_OUTLINE_WIDTH,
                           Text.TEXTBOX_OUTLINE_RADIUS, textbox_font,
@@ -33,20 +33,35 @@ class Simulation:
         objects.append(textbox)
         running = True
         while running:
-            for e in event.get():
+            for e in pygame.event.get():
                 if e.type == pygame.QUIT:
                     running = False
                     break
-                if e.type == pygame.KEYDOWN:
+                elif e.type == pygame.KEYDOWN:
                     key = e.key
                     if key == pygame.K_ESCAPE:
                         running = False
                         break
+                    # Should be replaced with more versatile keyboard in future
+                    if textbox.selected:
+                        if key == pygame.K_BACKSPACE:
+                            textbox.remove_character()
+                        else:
+                            textbox.add_character(chr(key))
+                elif e.type == pygame.MOUSEBUTTONDOWN:
+                    button = e.button
+                    pos = e.pos
+                    if button == 1:
+                        for object in objects:
+                            if object.rect.collidepoint(pos):
+                                object.click()
+                                continue
+                            object.unclick()
             for object in objects:
                 object.update()
                 object.render(self.screen)
-            # Should be replaced with display.update() at some point
-            display.flip()
+            # Should be replaced with pygame.display.update() at some point
+            pygame.display.flip()
 
 
 if __name__ == '__main__':
