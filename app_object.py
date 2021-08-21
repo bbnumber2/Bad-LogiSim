@@ -8,7 +8,7 @@ class AppObject:
         self.position = position
         self.size = size
         self.rect = pygame.Rect(position, size)
-        self.surface = None
+        self.surface = pygame.Surface(size)
         self.selected = False
 
     def render(self, screen: pygame.surface.Surface) -> None:

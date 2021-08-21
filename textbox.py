@@ -16,7 +16,6 @@ class Textbox(AppObject):
                  text_position: Tuple[int, int]) -> None:
         super().__init__(position, size)
         self.background_color = background_color
-        self.surface = pygame.surface.Surface(self.size)
         self.surface.fill(self.background_color)
         self.outline = pygame.rect.Rect(outline_position, self.size)
         self.outline_color = outline_color

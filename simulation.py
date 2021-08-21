@@ -1,6 +1,7 @@
 import pygame
-from constants import Display, Text
+from constants import Display, Text, Component
 from textbox import Textbox
+from power_node import PowerNode
 
 
 class Simulation:
@@ -30,7 +31,13 @@ class Simulation:
                           Text.TEXTBOX_OUTLINE_WIDTH,
                           Text.TEXTBOX_OUTLINE_RADIUS, textbox_font,
                           Text.COLOR, Text.TEXTBOX_TEXT_POSITION)
+        power_node = PowerNode((300, 300), (25, 25),
+                               Component.PowerNode.OUTLINE_COLOR,
+                               Component.PowerNode.OUTLINE_THICKNESS,
+                               Component.PowerNode.UNPOWERED_COLOR,
+                               Component.PowerNode.POWERED_COLOR)
         objects.append(textbox)
+        objects.append(power_node)
         running = True
         while running:
             for e in pygame.event.get():

@@ -21,3 +21,11 @@ class Text:
     TEXTBOX_OUTLINE_WIDTH = 2
     TEXTBOX_OUTLINE_RADIUS = 5
     TEXTBOX_TEXT_POSITION = (5, 0)
+
+
+class Component:
+    class PowerNode:
+        OUTLINE_COLOR = (90, 90, 90)
+        OUTLINE_THICKNESS = 3
+        UNPOWERED_COLOR = Display.BACKGROUND_COLOR
+        POWERED_COLOR = (215, 8, 50)
