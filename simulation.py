@@ -49,6 +49,8 @@ class Simulation:
                     if key == pygame.K_ESCAPE:
                         running = False
                         break
+                    elif key == pygame.K_w:
+                        pass
                     # Should be replaced with more versatile keyboard in future
                     if textbox.selected:
                         if key == pygame.K_BACKSPACE:
